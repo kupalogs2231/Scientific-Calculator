@@ -7,45 +7,60 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="calculator-container">
-        <h1>Scientific Calculator</h1>
-        
-        <div class="calculator">
-            <div class="display">
-                <div id="previous-operand" class="previous-operand"></div>
-                <div id="current-operand" class="current-operand">0</div>
+    <div class="wrapper">
+        <div class="calculator-container">
+            <h1>Scientific Calculator</h1>
+
+            <div class="calculator">
+                <div class="display">
+                    <div id="previous-operand" class="previous-operand"></div>
+                    <div id="current-operand" class="current-operand">0</div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn function" onclick="clearDisplay()">C</button>
+                    <button class="btn function" onclick="deleteLast()">DEL</button>
+                    <button class="btn function" onclick="calculateSquareRoot()">√</button>
+                    <button class="btn operator" onclick="appendOperator('/')">/</button>
+
+                    <button class="btn function" onclick="calculatePower()">x²</button>
+                    <button class="btn function" onclick="calculateSin()">sin</button>
+                    <button class="btn function" onclick="calculateCos()">cos</button>
+                    <button class="btn operator" onclick="appendOperator('*')">×</button>
+
+                    <button class="btn number" onclick="appendNumber('7')">7</button>
+                    <button class="btn number" onclick="appendNumber('8')">8</button>
+                    <button class="btn number" onclick="appendNumber('9')">9</button>
+                    <button class="btn operator" onclick="appendOperator('-')">-</button>
+
+                    <button class="btn number" onclick="appendNumber('4')">4</button>
+                    <button class="btn number" onclick="appendNumber('5')">5</button>
+                    <button class="btn number" onclick="appendNumber('6')">6</button>
+                    <button class="btn operator" onclick="appendOperator('+')">+</button>
+
+                    <button class="btn number" onclick="appendNumber('1')">1</button>
+                    <button class="btn number" onclick="appendNumber('2')">2</button>
+                    <button class="btn number" onclick="appendNumber('3')">3</button>
+                    <button class="btn function" onclick="calculateTan()">tan</button>
+
+                    <button class="btn number" onclick="appendNumber('0')">0</button>
+                    <button class="btn function" onclick="appendDecimal()">.</button>
+                    <button class="btn equals" onclick="calculate()">=</button>
+                    <button class="btn function" onclick="calculateLog()">log</button>
+                </div>
             </div>
 
-            <div class="buttons">
-                <button class="btn function" onclick="clearDisplay()">C</button>
-                <button class="btn function" onclick="deleteLast()">DEL</button>
-                <button class="btn function" onclick="calculateSquareRoot()">√</button>
-                <button class="btn operator" onclick="appendOperator('/')">/</button>
-
-                <button class="btn function" onclick="calculatePower()">x²</button>
-                <button class="btn function" onclick="calculateSin()">sin</button>
-                <button class="btn function" onclick="calculateCos()">cos</button>
-                <button class="btn operator" onclick="appendOperator('*')">×</button>
-
-                <button class="btn number" onclick="appendNumber('7')">7</button>
-                <button class="btn number" onclick="appendNumber('8')">8</button>
-                <button class="btn number" onclick="appendNumber('9')">9</button>
-                <button class="btn operator" onclick="appendOperator('-')">-</button>
-
-                <button class="btn number" onclick="appendNumber('4')">4</button>
-                <button class="btn number" onclick="appendNumber('5')">5</button>
-                <button class="btn number" onclick="appendNumber('6')">6</button>
-                <button class="btn operator" onclick="appendOperator('+')">+</button>
-
-                <button class="btn number" onclick="appendNumber('1')">1</button>
-                <button class="btn number" onclick="appendNumber('2')">2</button>
-                <button class="btn number" onclick="appendNumber('3')">3</button>
-                <button class="btn function" onclick="calculateTan()">tan</button>
-
-                <button class="btn number" onclick="appendNumber('0')">0</button>
-                <button class="btn function" onclick="appendDecimal()">.</button>
-                <button class="btn equals" onclick="calculate()">=</button>
-                <button class="btn function" onclick="calculateLog()">log</button>
+            <div class="instructions">
+                <h3>How to Use:</h3>
+                <ul>
+                    <li><strong>C</strong> - Clear all</li>
+                    <li><strong>DEL</strong> - Delete last character</li>
+                    <li><strong>√</strong> - Square root of current number</li>
+                    <li><strong>x²</strong> - Square the current number</li>
+                    <li><strong>sin/cos/tan</strong> - Trigonometric functions (in radians)</li>
+                    <li><strong>log</strong> - Base-10 logarithm</li>
+                    <li><strong>Basic operators</strong> - +, -, ×, /</li>
+                </ul>
             </div>
         </div>
 
@@ -56,19 +71,6 @@
             </div>
             <ul id="history-list">
                 <li class="history-empty">No calculations yet</li>
-            </ul>
-        </div>
-
-        <div class="instructions">
-            <h3>How to Use:</h3>
-            <ul>
-                <li><strong>C</strong> - Clear all</li>
-                <li><strong>DEL</strong> - Delete last character</li>
-                <li><strong>√</strong> - Square root of current number</li>
-                <li><strong>x²</strong> - Square the current number</li>
-                <li><strong>sin/cos/tan</strong> - Trigonometric functions (in radians)</li>
-                <li><strong>log</strong> - Base-10 logarithm</li>
-                <li><strong>Basic operators</strong> - +, -, ×, /</li>
             </ul>
         </div>
     </div>
