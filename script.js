@@ -1,9 +1,11 @@
 let currentOperand = '0';
 let previousOperand = '';
 let operation = null;
+let historyList = [];
 
 const currentOperandDisplay = document.getElementById('current-operand');
 const previousOperandDisplay = document.getElementById('previous-operand');
+const historyListEl = document.getElementById('history-list');
 
 function updateDisplay() {
     currentOperandDisplay.textContent = currentOperand;
@@ -13,6 +15,39 @@ function updateDisplay() {
     } else {
         previousOperandDisplay.textContent = previousOperand;
     }
+}
+
+function addToHistory(expression, result) {
+    historyList.unshift({ expression, result });
+    updateHistoryDisplay();
+}
+
+function updateHistoryDisplay() {
+    historyListEl.innerHTML = '';
+
+    if (historyList.length === 0) {
+        historyListEl.innerHTML = '<li class="history-empty">No calculations yet</li>';
+        return;
+    }
+
+    historyList.forEach(function(item) {
+        const li = document.createElement('li');
+        li.className = 'history-item';
+        li.innerHTML = `
+            <span class="history-expression">${item.expression}</span>
+            <span class="history-result">${item.result}</span>
+        `;
+        li.onclick = function() {
+            currentOperand = item.result.toString();
+            updateDisplay();
+        };
+        historyListEl.appendChild(li);
+    });
+}
+
+function clearHistory() {
+    historyList = [];
+    updateHistoryDisplay();
 }
 
 function appendNumber(number) {
@@ -90,6 +125,8 @@ function calculate() {
     }
     
     result = Math.round(result * 100000000) / 100000000;
+
+    addToHistory(`${previousOperand} ${operation} ${currentOperand}`, result);
     
     currentOperand = result.toString();
     operation = null;
@@ -111,6 +148,7 @@ function calculateSquareRoot() {
     }
     
     const result = Math.sqrt(number);
+    addToHistory(`√${number}`, result);
     currentOperand = result.toString();
     previousOperand = `√${number}`;
     updateDisplay();
@@ -125,6 +163,7 @@ function calculatePower() {
     }
     
     const result = Math.pow(number, 2);
+    addToHistory(`${number}²`, result);
     previousOperand = `${number}²`;
     currentOperand = result.toString();
     updateDisplay();
@@ -139,6 +178,7 @@ function calculateSin() {
     }
     
     const result = Math.sin(number);
+    addToHistory(`sin(${number})`, result.toFixed(8));
     previousOperand = `sin(${number})`;
     currentOperand = result.toFixed(8).toString();
     updateDisplay();
@@ -153,6 +193,7 @@ function calculateCos() {
     }
     
     const result = Math.cos(number);
+    addToHistory(`cos(${number})`, result.toFixed(8));
     previousOperand = `cos(${number})`;
     currentOperand = result.toFixed(8).toString();
     updateDisplay();
@@ -167,6 +208,7 @@ function calculateTan() {
     }
     
     const result = Math.tan(number);
+    addToHistory(`tan(${number})`, result.toFixed(8));
     previousOperand = `tan(${number})`;
     currentOperand = result.toFixed(8).toString();
     updateDisplay();
@@ -186,6 +228,7 @@ function calculateLog() {
     }
     
     const result = Math.log10(number);
+    addToHistory(`log(${number})`, result);
     previousOperand = `log(${number})`;
     currentOperand = result.toString();
     updateDisplay();
